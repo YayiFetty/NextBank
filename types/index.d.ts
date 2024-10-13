@@ -149,7 +149,7 @@ declare interface BankInfoProps {
   type: "full" | "card";
 }
 
-declare interface HeaderBoxProps {
+declare interface PageHeaderProps {
   type?: "title" | "greeting";
   title: string;
   subtext: string;
