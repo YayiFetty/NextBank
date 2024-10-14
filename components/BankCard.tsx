@@ -1,59 +1,67 @@
-import Link from "next/link";
-import React from "react";
-import { formatAmount } from "../lib/utils";
+import { formatAmount } from "@lib/utils";
 import Image from "next/image";
+import React from "react";
 
-export default function BankCard({
-  account,
-  userName,
-  showBalance = true,
-}: CreditCardProps) {
+const BankCard = ({account, userName, showBalance =true}:CreditCardProps) => {
   return (
     <div className="flex flex-col">
-      <Link href="/" className="bank-card">
-        <div className="bank-card_content">
-          <div>
-            <h1 className="text-16 font-semibold text-white">
-              {account.name || userName}
-            </h1>
-            <p className="font-ibm-plex-serif font-black text-white">
-              {formatAmount(account.currentBalance)}
-            </p>
-          </div>
-          <article className=" flex flex-col gap-2">
-            <div className="flex justify-between ">
-              <h1 className="text-12 font-semibold text-white ">{userName}</h1>
-              <h2 className="text-12 font-semibold text-white "> ●● / ●●</h2>
-            </div>
-            <p className="text-14 font-semibold tracking-[1.1px] text-white ">
-            ●●●● ●●●● ●●●● <span className="text-16 ">1234</span>
-            </p>
-          </article>
-        </div>
-
-        <div className="bank-card_icon">
-
-          <Image 
-          src="/icons/paypass.svg"
-           width={20}
-            height={24} 
-            alt="pay" />
+      <div className="bank-card">
+        {/* Background wave pattern */}
+        <div className="absolute right-0 -top-4 h-[200px] w-[65px] pointer-events-none bg-bank-gradient">
           <Image
-            src="/icons/mastercard.svg"
-            width={45}
-            height={32}
-            alt="mastedcard"
-            className=" ml-7"
+            src="/icons/lines.png"
+            alt="lines"
+            layout="fill"
+            objectFit="cover"
+            className="opacity-20"
           />
           <Image
             src="/icons/lines.png"
-            width={316}
-            height={190}
             alt="lines"
-            className="absolute top-0 left-0"
+            layout="fill"
+            objectFit="cover"
+            className="opacity-20"
           />
         </div>
-      </Link>
+
+        {/* Card content */}
+        <div className="relative z-10 flex flex-col h-full gap-7">
+          {/* for the header */}
+          <div className="flex justify-between gap-4">
+            <div className="flex flex-col gap-1">
+              <h2 className="text-white text-16 font-semibold">{account.name || userName}</h2>
+              <p className="text-white font-black font-ibm-plex-serif">{formatAmount(account.currentBalance)}</p>
+            </div>
+            <Image
+              src="/icons/Paypass.svg"
+              alt="paypass"
+              width={23}
+              height={23}
+            />
+          </div>
+
+          {/* name */}
+          <div className=" flex justify-between max-w-[140px] w-full">
+            <h2 className="text-white text-12 font-semibold">{userName}</h2>
+            <p className="text-white text-12 font-semibold">●●/●●</p>
+          </div>
+
+          {/* card number and logo */}
+          <div className="flex justify-between items-center gap-5">
+            <h3 className="text-white text-14 tracking-[1.1px">
+              ●●●● ●●●● ●●●● <span className="text-16">2334</span>
+            </h3>
+            <Image
+              src="/icons/mastercard.svg"
+              alt="master"
+              width={40}
+              height={25}
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default BankCard;
